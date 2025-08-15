@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surat Cinta Buat Kamu 💌</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      text-align: center;
+      color: #fff;
+      position: relative;
+      max-width: 600px;
+      padding: 20px;
+    }
+
+    .envelope {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      font-size: 2em;
+    }
+
+    button {
+      background: #ff6f91;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      color: white;
+      font-size: 1em;
+      cursor: pointer;
+      margin-top: 20px;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #ff3e6c;
+    }
+
+    #surat-text {
+      white-space: pre-wrap;
+      text-align: left;
+      font-size: 1.1em;
+      margin-top: 20px;
+      color: #fff;
+    }
+
+    .emoji {
+      font-size: 2em;
+      position: absolute;
+      animation: float 6s infinite ease-in-out;
+      user-select: none;
+    }
+
+    .emoji:nth-child(4) {
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .emoji:nth-child(5) {
+      top: 40%;
+      left: 80%;
+      animation-delay: 2s;
+    }
+
+    .emoji:nth-child(6) {
+      top: 70%;
+      left: 50%;
+      animation-delay: 4s;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(-40px); opacity: 0.7; }
+      100% { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="envelope">
+      <h1>Hai Kamu 😘</h1>
+      <p id="surat-text"></p>
+      <button onclick="tampilkanSurat()">Buka Surat 💌</button>
+      <div class="emoji">💖</div>
+      <div class="emoji">🥰</div>
+      <div class="emoji">💫</div>
+    </div>
+  </div>
+
+  <script>
+    const teksSurat = `Aku cuma mau bilang...
+Kamu itu spesial banget buat aku 💖
+
+Setiap hari aku bersyukur bisa kenal kamu, 
+ngobrol sama kamu, dan ngerasain semua momen yang bikin senyumku ga bisa ilang 😌
+
+Maaf kalo kadang aku nyebelin, tapi beneran deh...
+Aku sayang banget sama kamu 🥺❤️
+
+Jangan pernah ragu ya...
+Karena aku di sini, buat kamu.`;
+
+    function tampilkanSurat() {
+      let i = 0;
+      const speed = 40;
+      const suratText = document.getElementById("surat-text");
+      suratText.innerHTML = "";
+
+      function ketik() {
+        if (i < teksSurat.length) {
+          suratText.innerHTML += teksSurat.charAt(i);
+          i++;
+          setTimeout(ketik, speed);
+        }
+      }
+
+      ketik();
+    }
+  </script>
+</body>
+</html>
