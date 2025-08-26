@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Surat Cinta Buat Kamu 💌</title>
   <style>
     body {
@@ -18,36 +18,54 @@
     }
 
     .container {
-      text-align: center;
-      color: #fff;
       position: relative;
+      width: 90%;
       max-width: 600px;
-      padding: 20px;
-    }
-
-    .envelope {
       background: rgba(255, 255, 255, 0.2);
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      text-align: center;
+      color: #fff;
+    }
+
+    .slide {
+      display: none;
+      font-size: 1.1em;
+      white-space: pre-wrap;
+      text-align: left;
+    }
+
+    .slide.active {
+      display: block;
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     h1 {
       margin-bottom: 20px;
-      font-size: 2em;
+    }
+
+    .buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
     }
 
     button {
       background: #ff6f91;
       border: none;
-      padding: 12px 24px;
+      padding: 10px 20px;
       border-radius: 30px;
       color: white;
       font-size: 1em;
       cursor: pointer;
-      margin-top: 20px;
       transition: background 0.3s ease;
     }
 
@@ -55,17 +73,9 @@
       background: #ff3e6c;
     }
 
-    #surat-text {
-      white-space: pre-wrap;
-      text-align: left;
-      font-size: 1.1em;
-      margin-top: 20px;
-      color: #fff;
-    }
-
     .emoji {
-      font-size: 2em;
       position: absolute;
+      font-size: 2em;
       animation: float 6s infinite ease-in-out;
       user-select: none;
     }
@@ -97,45 +107,74 @@
 </head>
 <body>
   <div class="container">
-    <div class="envelope">
-      <h1>Hai Kamu 😘</h1>
-      <p id="surat-text"></p>
-      <button onclick="tampilkanSurat()">Buka Surat 💌</button>
-      <div class="emoji">💖</div>
-      <div class="emoji">🥰</div>
-      <div class="emoji">💫</div>
+    <h1>Hai Kamu 😘</h1>
+
+    <div id="slide1" class="slide active">...</div>
+    <div id="slide2" class="slide">...</div>
+    <div id="slide3" class="slide">...</div>
+    <div id="slide4" class="slide">...</div>
+
+    <div class="buttons">
+      <button onclick="sebelumnya()">⬅️ Sebelumnya</button>
+      <button onclick="selanjutnya()">Selanjutnya ➡️</button>
     </div>
+
+    <div class="emoji">💖</div>
+    <div class="emoji">🥰</div>
+    <div class="emoji">💫</div>
   </div>
 
   <script>
-    const teksSurat = `Aku cuma mau bilang...
-Kamu itu spesial banget buat aku 💖
+    const slides = [
+      "Aku cuma mau bilang...\nKamu itu spesial banget buat aku 💖",
+      "Setiap hari aku bersyukur bisa kenal kamu,\nngobrol sama kamu, dan ngerasain semua momen yang bikin senyumku ga bisa ilang 😌",
+      "Maaf kalo kadang aku nyebelin,\ntapi beneran deh...\nAku sayang banget sama kamu 🥺❤️",
+      "Jangan pernah ragu ya...\nKarena aku di sini, buat kamu."
+    ];
 
-Setiap hari aku bersyukur bisa kenal kamu, 
-ngobrol sama kamu, dan ngerasain semua momen yang bikin senyumku ga bisa ilang 😌
+    let currentSlide = 0;
+    const totalSlides = slides.length;
 
-Maaf kalo kadang aku nyebelin, tapi beneran deh...
-Aku sayang banget sama kamu 🥺❤️
-
-Jangan pernah ragu ya...
-Karena aku di sini, buat kamu.`;
-
-    function tampilkanSurat() {
-      let i = 0;
-      const speed = 40;
-      const suratText = document.getElementById("surat-text");
-      suratText.innerHTML = "";
-
-      function ketik() {
-        if (i < teksSurat.length) {
-          suratText.innerHTML += teksSurat.charAt(i);
-          i++;
-          setTimeout(ketik, speed);
-        }
+    function tampilkanSlide(index) {
+      for (let i = 0; i < totalSlides; i++) {
+        const el = document.getElementById("slide" + (i + 1));
+        el.classList.remove("active");
       }
 
+      const target = document.getElementById("slide" + (index + 1));
+      target.innerHTML = "";
+      ketikSlide(slides[index], target);
+      target.classList.add("active");
+    }
+
+    function ketikSlide(text, el) {
+      let i = 0;
+      function ketik() {
+        if (i < text.length) {
+          el.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(ketik, 40);
+        }
+      }
       ketik();
     }
+
+    function selanjutnya() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        tampilkanSlide(currentSlide);
+      }
+    }
+
+    function sebelumnya() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        tampilkanSlide(currentSlide);
+      }
+    }
+
+    // Inisialisasi pertama
+    tampilkanSlide(currentSlide);
   </script>
 </body>
 </html>
