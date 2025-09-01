@@ -17,6 +17,8 @@
     padding: 20px;
     max-width: 900px;
     margin: auto;
+    position: relative;
+    overflow-x: hidden;
   }
   h1, h2, h3 {
     color: #ffb347; /* orange-gold */
@@ -48,10 +50,24 @@
     color: #ffd369;
   }
   section {
-    display: none; /* hide all by default */
+    position: absolute;
+    top: 15px; /* agar tidak menutupi navbar dan judul */
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+    pointer-events: none;
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px #ffb347aa;
   }
   section.active {
-    display: block; /* show only active */
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
   }
   .controls {
     text-align: center;
@@ -72,6 +88,29 @@
   .controls button:hover {
     background-color: #ffd369;
   }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 15px;
+    color: #eee;
+  }
+  table, th, td {
+    border: 1px solid #ffb347;
+  }
+  th, td {
+    padding: 8px 10px;
+    text-align: center;
+  }
+  th {
+    background: #333;
+  }
+  ul {
+    margin-left: 20px;
+    margin-bottom: 15px;
+  }
+  ul li {
+    margin-bottom: 6px;
+  }
   /* Responsive */
   @media(max-width: 600px) {
     body {
@@ -82,24 +121,6 @@
       margin: 0 8px;
     }
   }
-  section {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.5s ease-in-out;
-  position: absolute;
-  width: 100%;
-  left: 0;
-  top: 200px; /* agar tidak menutupi navbar dan title */
-}
-
-section.active {
-  display: block;
-  opacity: 1;
-  position: relative;
-}
-  body {
-  position: relative;
-}
 </style>
 </head>
 <body>
@@ -114,21 +135,10 @@ section.active {
   </nav>
 
   <section id="bab1" class="active">
-    <!-- Content BAB 1 -->
     <h2>BAB 1 - Pendahuluan</h2>
     <p><strong>Pengaruh Rokok terhadap Kesehatan Paru-Paru kelas 1 SMK Pondok Pesantren Bahtra</strong></p>
-    <p>Ketika kelas 1 SMK Bahtra, saya memiliki seorang teman yang mengalami penyakit paru-paru </p>
-    <p>dia sering batuk-batuk parah,sampai harus dibawa ke rumah
-sakit terdekat. Setelah di bawa ke dokter, ternyata penyakit paru-parunya
-disebabkan oleh beberapa factor, diantaranya sering tidur dilantai,sering
-bergadang, kurang berolahraga, dan terlalu banyak merokok yang Hal ini diperkuat
-oleh informasi dari Kompas TV.Memang benar menurut teman sekelas saya rokok
-itu sangat berbahaya dan didalamnya itu memiliki zat kimia yang sangat berbahaya
-yang dapat menyebabkan penyakit paru-paru.Namun, setiap masalah ada solusinya
-solusi pada froblem kali ini adalah dengan mengurangi segala penyebab terjadinya
-penyakit paru-paru seperti merokok dan lain-lain. Alasan saya memilih judul ini
-karna banyak sekali teman sekelas saya yang mengalami batuk-batuk dandan merasa
-sesak nafasnya dan bayak juga yang merokok dilingkungan saya. </p>
+    <p>Ketika kelas 1 SMK Bahtra, saya memiliki seorang teman yang mengalami penyakit paru-paru.</p>
+    <p>Dia sering batuk-batuk parah, sampai harus dibawa ke rumah sakit terdekat. Setelah dibawa ke dokter, ternyata penyakit paru-parunya disebabkan oleh beberapa faktor, di antaranya sering tidur di lantai, sering bergadang, kurang berolahraga, dan terlalu banyak merokok. Hal ini diperkuat oleh informasi dari Kompas TV. Memang benar menurut teman sekelas saya rokok itu sangat berbahaya dan di dalamnya itu memiliki zat kimia yang sangat berbahaya yang dapat menyebabkan penyakit paru-paru. Namun, setiap masalah ada solusinya. Solusi pada problem kali ini adalah dengan mengurangi segala penyebab terjadinya penyakit paru-paru seperti merokok dan lain-lain. Alasan saya memilih judul ini karena banyak sekali teman sekelas saya yang mengalami batuk-batuk dan merasa sesak nafasnya dan banyak juga yang merokok di lingkungan saya.</p>
     <h3>B. Batasan Masalah</h3>
     <p>Penjelasan atau informasi ini terkhususkan untuk kelas 1 SMK Ponpes Bahtra, karena banyaknya pemakai rokok.</p>
     <h3>C. Rumusan Masalah</h3>
@@ -140,7 +150,6 @@ sesak nafasnya dan bayak juga yang merokok dilingkungan saya. </p>
   </section>
 
   <section id="bab2">
-    <!-- Content BAB 2 -->
     <h2>BAB 2 - Pembahasan</h2>
     <h3>1. Pengertian Rokok</h3>
     <p>Rokok adalah produk tembakau yang dibungkus dalam kertas atau bahan lain...</p>
@@ -167,7 +176,6 @@ sesak nafasnya dan bayak juga yang merokok dilingkungan saya. </p>
   </section>
 
   <section id="bab3">
-    <!-- Content BAB 3 -->
     <h2>BAB 3 - Metodologi Penelitian</h2>
     <h3>A. Waktu dan Tempat</h3>
     <ul>
@@ -203,7 +211,6 @@ sesak nafasnya dan bayak juga yang merokok dilingkungan saya. </p>
   </section>
 
   <section id="bab4">
-    <!-- Content BAB 4 -->
     <h2>BAB 4 - Analisis & Pembahasan</h2>
 
     <h3>Pertanyaan 1:</h3>
@@ -232,24 +239,28 @@ sesak nafasnya dan bayak juga yang merokok dilingkungan saya. </p>
 
     <h3>Pertanyaan 7:</h3>
     <p><strong>Apakah anda sering merasa pusing setelah merokok?</strong></p>
-    <p>Tujuan dari pertanyaan ini adalah untuk mengidentifikasi efek langsung dari merokok terhadap tubuh siswa. Hasil dari observasi 1 orang "Sangat Tidak Setuju", 7 orang "Tidak Setuju", 2 orang "Setuju". Sebagian besar siswa tidak merasa pusing setelah merokok, kemungkinan karena mereka belum merokok atau belum menyadari efeknya. Tapi tetap, ini menunjukkan masih ada siswa yang terpapar rokok.</p>
+    <p>Tujuan dari pertanyaan ini adalah mengetahui efek negatif langsung rokok pada siswa. Hasilnya 1 orang "Sangat Tidak Setuju", 7 orang "Tidak Setuju", 2 orang "Setuju". Sebagian kecil siswa merasakan pusing, ini tanda rokok sudah mulai berdampak negatif pada kesehatan mereka.</p>
 
     <h3>Pertanyaan 8:</h3>
     <p><strong>Apakah kamu sering merasakan sesak napas?</strong></p>
-    <p>Pertanyaan ini ingin mengetahui gejala awal gangguan pernapasan pada siswa. Hasil dari observasi 6 orang "Sangat Tidak Setuju", 3 orang "Tidak Setuju", 1 orang "Setuju". Mayoritas siswa tidak mengalami sesak napas, artinya secara umum kondisi paru-paru mereka masih baik.</p>
+    <p>Ini untuk mengetahui gejala penyakit paru yang dialami siswa. Hasil observasi: 6 orang "Sangat Tidak Setuju", 3 orang "Tidak Setuju", 1 orang "Setuju". Hanya sedikit yang mengalami sesak napas, tapi hal ini harus diperhatikan agar tidak bertambah parah.</p>
 
     <h3>Pertanyaan 9:</h3>
     <p><strong>Apakah anda merasa bahwa batuk anda tidak berhenti-henti?</strong></p>
-    <p>Pertanyaan ini untuk mendeteksi gejala batuk kronis. Hasil dari observasi 5 orang "Sangat Tidak Setuju", 5 orang "Tidak Setuju". Semua siswa menyatakan tidak mengalami batuk yang berkepanjangan, ini menunjukkan kondisi kesehatan pernapasan mereka tergolong baik.</p>
+    <p>Untuk melihat apakah siswa mengalami batuk kronis. Hasil observasi: 5 orang "Sangat Tidak Setuju", 5 orang "Tidak Setuju". Tidak ada siswa yang menyatakan setuju, berarti batuk kronis tidak umum terjadi.</p>
 
     <h3>Pertanyaan 10:</h3>
     <p><strong>Apakah batukmu disertai berdarah?</strong></p>
-    <p>Pertanyaan ini bertujuan mendeteksi gejala serius yang perlu perhatian medis seperti TBC. Hasil dari observasi 7 orang "Sangat Tidak Setuju", 3 orang "Tidak Setuju". Tidak ada siswa yang mengalami batuk berdarah, yang berarti tidak ditemukan gejala penyakit berat terkait paru-paru.</p>
+    <p>Untuk mengetahui gejala serius penyakit paru. Hasil observasi: 7 orang "Sangat Tidak Setuju", 3 orang "Tidak Setuju". Tidak ada siswa yang mengalami batuk berdarah.</p>
+
+    <h3>Kesimpulan</h3>
+    <p>Dari hasil observasi dan analisis, dapat disimpulkan bahwa meskipun sebagian siswa memiliki kebiasaan sehat, ada indikasi bahaya rokok yang mulai terlihat, seperti pusing setelah merokok dan sesak napas. Oleh karena itu, penting untuk terus memberikan edukasi dan tindakan preventif agar kesehatan paru-paru siswa tetap terjaga.</p>
+
   </section>
 
   <div class="controls">
     <button id="prevBtn">Sebelumnya</button>
-    <button id="nextBtn">Selanjutnya</button>
+    <button id="nextBtn">Berikutnya</button>
   </div>
 
 <script>
@@ -259,45 +270,37 @@ sesak nafasnya dan bayak juga yang merokok dilingkungan saya. </p>
   const nextBtn = document.getElementById('nextBtn');
   let currentSlide = 0;
 
- function showSlide(index) {
-  if (index < 0) index = sections.length - 1;
-  if (index >= sections.length) index = 0;
+  function showSlide(index) {
+    if (index < 0) index = sections.length -1;
+    else if (index >= sections.length) index = 0;
+    currentSlide = index;
 
-  sections.forEach((sec, i) => {
-    if (i === index) {
-      sec.style.display = 'block';
-      setTimeout(() => {
-        sec.classList.add('active');
-      }, 10); // memberikan waktu kecil agar transisi bekerja
-    } else {
-      sec.classList.remove('active');
-      setTimeout(() => {
-        sec.style.display = 'none';
-      }, 500); // waktu yang sama dengan CSS transition
-    }
-  });
+    sections.forEach((sec, i) => {
+      sec.classList.toggle('active', i === index);
+    });
+
+    navLinks.forEach((link, i) => {
+      link.style.color = (i === index) ? '#ffd369' : '#ffb347';
+      link.style.fontWeight = (i === index) ? '700' : '600';
+    });
+  }
 
   navLinks.forEach((link, i) => {
-    link.style.color = i === index ? '#ffd369' : '#ffb347';
-  });
-
-  currentSlide = index;
-}
-
-
-  navLinks.forEach(link => {
     link.addEventListener('click', () => {
-      const slideIndex = Number(link.getAttribute('data-slide'));
-      showSlide(slideIndex);
+      showSlide(i);
     });
   });
 
-  // Initialize
-  showSlide(0);
+  prevBtn.addEventListener('click', () => {
+    showSlide(currentSlide -1);
+  });
+
+  nextBtn.addEventListener('click', () => {
+    showSlide(currentSlide +1);
+  });
+
+  showSlide(currentSlide);
 </script>
 
 </body>
 </html>
-
-
-
