@@ -82,6 +82,24 @@
       margin: 0 8px;
     }
   }
+  section {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top: 200px; /* agar tidak menutupi navbar dan title */
+}
+
+section.active {
+  display: block;
+  opacity: 1;
+  position: relative;
+}
+  body {
+  position: relative;
+}
 </style>
 </head>
 <body>
@@ -109,7 +127,8 @@ itu sangat berbahaya dan didalamnya itu memiliki zat kimia yang sangat berbahaya
 yang dapat menyebabkan penyakit paru-paru.Namun, setiap masalah ada solusinya
 solusi pada froblem kali ini adalah dengan mengurangi segala penyebab terjadinya
 penyakit paru-paru seperti merokok dan lain-lain. Alasan saya memilih judul ini
-karna banyak sekali teman sekelas saya yang mengalami batuk-batuk dan </p>
+karna banyak sekali teman sekelas saya yang mengalami batuk-batuk dandan merasa
+sesak nafasnya dan bayak juga yang merokok dilingkungan saya. </p>
     <h3>B. Batasan Masalah</h3>
     <p>Penjelasan atau informasi ini terkhususkan untuk kelas 1 SMK Ponpes Bahtra, karena banyaknya pemakai rokok.</p>
     <h3>C. Rumusan Masalah</h3>
@@ -240,25 +259,31 @@ karna banyak sekali teman sekelas saya yang mengalami batuk-batuk dan </p>
   const nextBtn = document.getElementById('nextBtn');
   let currentSlide = 0;
 
-  function showSlide(index) {
-    if(index < 0) index = sections.length - 1;
-    if(index >= sections.length) index = 0;
-    sections.forEach((sec, i) => {
-      sec.classList.toggle('active', i === index);
-    });
-    navLinks.forEach((link, i) => {
-      link.style.color = i === index ? '#ffd369' : '#ffb347';
-    });
-    currentSlide = index;
-  }
+ function showSlide(index) {
+  if (index < 0) index = sections.length - 1;
+  if (index >= sections.length) index = 0;
 
-  prevBtn.addEventListener('click', () => {
-    showSlide(currentSlide - 1);
+  sections.forEach((sec, i) => {
+    if (i === index) {
+      sec.style.display = 'block';
+      setTimeout(() => {
+        sec.classList.add('active');
+      }, 10); // memberikan waktu kecil agar transisi bekerja
+    } else {
+      sec.classList.remove('active');
+      setTimeout(() => {
+        sec.style.display = 'none';
+      }, 500); // waktu yang sama dengan CSS transition
+    }
   });
 
-  nextBtn.addEventListener('click', () => {
-    showSlide(currentSlide + 1);
+  navLinks.forEach((link, i) => {
+    link.style.color = i === index ? '#ffd369' : '#ffb347';
   });
+
+  currentSlide = index;
+}
+
 
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -273,5 +298,6 @@ karna banyak sekali teman sekelas saya yang mengalami batuk-batuk dan </p>
 
 </body>
 </html>
+
 
 
